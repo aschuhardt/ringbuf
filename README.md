@@ -12,11 +12,13 @@ Initialization:
 rb_buffer_t* buffer = rb_create(CAPACITY, BLOCK_SIZE);
 ```
 
+
 Write:
 ```c
 // copy a block of data into the tail of the structure
 rb_insert(buffer, (void*)some_data, data_length);
 ```
+
 
 Read:
 ```c
@@ -30,6 +32,7 @@ rb_get_tail(buffer, (void*)&result, &length);
 size_t offset = 4;
 rb_get_at(buffer, offset, (void*)&result, &length);
 ```
+
 
 Cleanup:
 ```c
