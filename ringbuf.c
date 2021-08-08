@@ -1,3 +1,26 @@
+/*
+
+Copyright (c) 2021 Addison Schuhardt
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+*/
+
 #include "ringbuf.h"
 
 #include <stdlib.h>
@@ -26,13 +49,21 @@ static void set_head_and_tail(rb_buffer_t* buf) {
 }
 
 static void rotate_buffer(rb_buffer_t* buf) {
+  // rotate the block of pointers-to-blocks one unit toward the "head" of the
+  // structure; the head (the oldest record) will be reused to point to the
+  // newest insertion (the "tail")
+
   memmove(&buf->indices[1], buf->indices,
           sizeof(rb_block_t*) * (buf->capacity - 1));
   buf->indices[0] = buf->head;
+
+  // update head and tail pointers post-rotation
   set_head_and_tail(buf);
 }
 
 static void write_to_tail(rb_buffer_t* buf, void* data, size_t len) {
+  // copy the provided block of memory into the record to which the tail points
+
   rb_block_t* block = buf->tail;
   block->length = len;
   memcpy(block->data, data, len);
@@ -57,6 +88,7 @@ rb_buffer_t* rb_create(size_t capacity, size_t block_size) {
   buf->indices = malloc(capacity * sizeof(rb_block_t*));
   buf->blocks = calloc(capacity, sizeof(rb_block_t));
 
+  // allocate each "record" block's buffer and set its length to 0
   for (size_t i = 0; i < capacity; ++i) {
     rb_block_t* block = &buf->blocks[i];
 
