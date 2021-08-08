@@ -2,7 +2,15 @@
 
 # ringbuf
   
-A small, general-purpose ring buffer structure 
+A small, general-purpose ring buffer structure.
+
+This particular implementation was created with logging applications in mind, though it can be used to store any kind of data.
+
+Goals:
+- Perform no memory allocations after initialization
+- Provide a LIFO interface to "the last n" records inserted
+- Execute reading and writing to the buffer in constant time
+- Be easy to use and integrate into projects using the CMake build tools
 
 ## Linking (CMake)
 
