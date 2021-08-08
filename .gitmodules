@@ -1,3 +1,3 @@
 [submodule "test/ctest"]
 	path = test/ctest
-	url = git@github.com:aschuhardt/ctest.git
+	url = https://github.com/aschuhardt/ctest.git
