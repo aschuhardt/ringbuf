@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
 project(ringbuf
-  VERSION 0.1.0
+  VERSION 1.0.0
   DESCRIPTION "A small, general-purpose ring buffer structure"
   LANGUAGES C)
 
