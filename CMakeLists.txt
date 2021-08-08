@@ -21,3 +21,5 @@ configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/example/proserpine.txt
   ${CMAKE_BINARY_DIR}/proserpine.txt
   COPYONLY)
+
+add_subdirectory(test)
