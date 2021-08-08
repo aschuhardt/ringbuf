@@ -1,6 +1,6 @@
 add_executable(run_tests
   ${CMAKE_CURRENT_SOURCE_DIR}/ctest/main.c
-  unit_tests.c)
+  ${CMAKE_CURRENT_SOURCE_DIR}/unit_tests.c)
 target_include_directories(run_tests
   PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}/ctest

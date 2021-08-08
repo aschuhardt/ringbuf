@@ -1,5 +1,7 @@
-# ringbuf
+[![CMake](https://github.com/aschuhardt/ringbuf/actions/workflows/cmake.yml/badge.svg)](https://github.com/aschuhardt/ringbuf/actions/workflows/cmake.yml)
 
+# ringbuf
+  
 A small, general-purpose ring buffer structure 
 
 ## Linking (CMake)
