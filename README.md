@@ -2,6 +2,22 @@
 
 A small, general-purpose ring buffer structure 
 
+## Linking (CMake)
+
+Use the variables `RINGBUF_LIBRARY` and `RINGBUF_INCLUDE_DIR` in your CMakeLists file.
+
+Plural versions of those variable names are also defined if preferable.
+
+## Test (CMake)
+
+Execute the following in order to run unit tests:
+
+```
+git subodule update --init
+mkdir build && cd build
+cmake .. && make test
+```
+
 ## Usage
 
 Initialization:
